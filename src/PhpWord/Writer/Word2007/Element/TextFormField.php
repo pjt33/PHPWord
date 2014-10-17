@@ -18,11 +18,9 @@
 namespace PhpOffice\PhpWord\Writer\Word2007\Element;
 
 /**
- * CheckBox element writer
- *
- * @since 0.10.0
+ * TextFormField element writer
  */
-class CheckBox extends AbstractComplexField
+class TextFormField extends AbstractComplexField
 {
     /**
      * Write element
@@ -30,7 +28,7 @@ class CheckBox extends AbstractComplexField
     public function write()
     {
         $element = $this->getElement();
-        if ($element instanceof \PhpOffice\PhpWord\Element\CheckBox) {
+        if ($element instanceof \PhpOffice\PhpWord\Element\TextFormField) {
             parent::write();
         }
     }
@@ -40,24 +38,16 @@ class CheckBox extends AbstractComplexField
         $xmlWriter = $this->getXmlWriter();
         $element = $this->getElement();
 
-        $xmlWriter->startElement('w:checkBox');
-        $xmlWriter->writeAttribute('w:sizeAuto', '');
-        $xmlWriter->startElement('w:default');
-        $xmlWriter->writeAttribute('w:val', 0);
-        $xmlWriter->endElement(); //w:default
-        if ($element->getChecked()) {
-            $xmlWriter->startElement('w:checked');
-            $xmlWriter->endElement(); // w:checked
-        }
-        $xmlWriter->endElement(); //w:checkBox
+        $xmlWriter->startElement('w:textInput');
+        $xmlWriter->endElement(); //w:textInput
     }
 
     protected function getFieldCodes()
     {
-        return ' FORMCHECKBOX ';
+        return ' FORMTEXT ';
     }
 
-    protected function writeSuffix() {
+    protected function writeResultElements(){
         $xmlWriter = $this->getXmlWriter();
         $element = $this->getElement();
 

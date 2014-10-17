@@ -39,6 +39,7 @@ use PhpOffice\PhpWord\PhpWord;
  * @method TextBox addTextBox($style = null)
  * @method Field addField($type = null, $properties = array(), $options = array())
  * @method Line addLine($lineStyle = null)
+ * @method TextFormField addTextFormField($name, $text, $fStyle = null, $pStyle = null)
  *
  * @since 0.10.0
  */
@@ -74,7 +75,7 @@ abstract class AbstractContainer extends AbstractElement
     {
         $elements = array('Text', 'TextRun', 'Link', 'PreserveText', 'TextBreak',
             'ListItem', 'ListItemRun', 'Table', 'Image', 'Object', 'Footnote',
-            'Endnote', 'CheckBox', 'TextBox', 'Field', 'Line');
+            'Endnote', 'CheckBox', 'TextBox', 'Field', 'Line', 'TextFormField');
         $functions = array();
         for ($i = 0; $i < count($elements); $i++) {
             $functions[$i] = 'add' . $elements[$i];
@@ -248,6 +249,7 @@ abstract class AbstractContainer extends AbstractElement
             'Table'         => array('Section', 'Header', 'Footer', 'Cell', 'TextBox'),
             'CheckBox'      => array('Section', 'Header', 'Footer', 'Cell'),
             'TextBox'       => array('Section', 'Header', 'Footer', 'Cell'),
+            'TextFormField' => array('Section', 'Header', 'Footer', 'Cell'),
             'Footnote'      => array('Section', 'TextRun', 'Cell'),
             'Endnote'       => array('Section', 'TextRun', 'Cell'),
             'PreserveText'  => array('Header', 'Footer', 'Cell'),

@@ -17,38 +17,55 @@
 
 namespace PhpOffice\PhpWord\Element;
 
+use PhpOffice\PhpWord\Shared\String;
+
 /**
- * Check box element
+ * Complex field element
  */
-class CheckBox extends AbstractComplexField
+abstract class AbstractComplexField extends Text
 {
     /**
-     * Is this checked?
+     * Name content
      *
-     * @var boolean
+     * @var string
      */
-    private $checked = false;
+    private $name;
 
     /**
-     * Set "checked" status
+     * Create new instance
      *
-     * @param boolean $checked
+     * @param string $name
+     * @param string $text
+     * @param mixed $fontStyle
+     * @param mixed $paragraphStyle
      * @return self
      */
-    public function setChecked($checked)
+    public function __construct($name = null, $text = null, $fontStyle = null, $paragraphStyle = null)
     {
-        $this->checked = (boolean)$checked;
+        $this->setName($name);
+        parent::__construct($text, $fontStyle, $paragraphStyle);
+    }
+
+    /**
+     * Set name content
+     *
+     * @param string $name
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = String::toUTF8($name);
 
         return $this;
     }
 
     /**
-     * Get "checked" status
+     * Get name content
      *
-     * @return boolean
+     * @return string
      */
-    public function getChecked()
+    public function getName()
     {
-        return $this->checked;
+        return $this->name;
     }
 }
