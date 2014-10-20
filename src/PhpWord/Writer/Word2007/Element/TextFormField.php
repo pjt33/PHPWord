@@ -50,12 +50,19 @@ class TextFormField extends AbstractComplexField
     protected function writeResultElements(){
         $xmlWriter = $this->getXmlWriter();
         $element = $this->getElement();
+        $text = $element->getText();
+
+        // Mimic the "empty" value used by Word itself.
+        // json_decode trick from http://stackoverflow.com/a/6058533
+        if (!$text) {
+            $text = json_decode('"\u2002\u2002\u2002\u2002\u2002"');
+        }
 
         $xmlWriter->startElement('w:r');
         $this->writeFontStyle();
         $xmlWriter->startElement('w:t');
         $xmlWriter->writeAttribute('xml:space', 'preserve');
-        $xmlWriter->writeRaw($this->getText($element->getText()));
+        $xmlWriter->writeRaw($this->getText($text));
         $xmlWriter->endElement(); // w:t
         $xmlWriter->endElement(); // w:r
     }
