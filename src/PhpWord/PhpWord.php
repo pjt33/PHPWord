@@ -47,6 +47,13 @@ class PhpWord
     private $documentProperties;
 
     /**
+     * Document settings object
+     *
+     * @var DocumentSettings
+     */
+    private $documentSettings;
+
+    /**
      * Collection of sections
      *
      * @var \PhpOffice\PhpWord\Element\Section[]
@@ -80,6 +87,7 @@ class PhpWord
     public function __construct()
     {
         $this->documentProperties = new DocumentProperties();
+        $this->documentSettings = new DocumentSettings();
         $this->titles = new Titles();
         $this->footnotes = new Footnotes();
         $this->endnotes = new Endnotes();
@@ -104,6 +112,29 @@ class PhpWord
     public function setDocumentProperties(DocumentProperties $documentProperties)
     {
         $this->documentProperties = $documentProperties;
+
+        return $this;
+    }
+
+    /**
+     * Get document settings object
+     *
+     * @return DocumentSettings
+     */
+    public function getDocumentSettings()
+    {
+        return $this->documentSettings;
+    }
+
+    /**
+     * Set document settings object
+     *
+     * @param DocumentSettings $documentSettings
+     * @return self
+     */
+    public function setDocumentSettings(DocumentSettings $documentSettings)
+    {
+        $this->documentSettings = $documentSettings;
 
         return $this;
     }

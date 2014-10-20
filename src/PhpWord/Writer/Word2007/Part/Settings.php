@@ -31,9 +31,13 @@ class Settings extends AbstractPart
      */
     public function write()
     {
+        $phpWord = $this->getParentWriter()->getPhpWord();
+        $settings = $phpWord->getDocumentSettings();
+
         $settings = array(
             'w:zoom' => array('@attributes' => array('w:percent' => '100')),
             'w:embedSystemFonts' => '',
+            'w:documentProtection' => array('@attributes' => array('w:edit' => $settings->getEditRestrictions(), 'w:enforcement' => '1')),
             'w:defaultTabStop' => array('@attributes' => array('w:val' => '708')),
             'w:hyphenationZone' => array('@attributes' => array('w:val' => '425')),
             'w:doNotHyphenateCaps' => '',
