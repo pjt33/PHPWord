@@ -75,7 +75,7 @@ abstract class AbstractContainer extends AbstractElement
     {
         $elements = array('Text', 'TextRun', 'Link', 'PreserveText', 'TextBreak',
             'ListItem', 'ListItemRun', 'Table', 'Image', 'Object', 'Footnote',
-            'Endnote', 'CheckBox', 'TextBox', 'Field', 'Line', 'TextFormField');
+            'Endnote', 'CheckBox', 'TextBox', 'Field', 'Line', 'TextFormField', 'DropDown');
         $functions = array();
         for ($i = 0; $i < count($elements); $i++) {
             $functions[$i] = 'add' . $elements[$i];
