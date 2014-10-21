@@ -37,6 +37,13 @@ class Cell extends AbstractContainer
     private $width = null;
 
     /**
+     * Cell width unit
+     *
+     * @var string Width unit
+     */
+    private $unit = null;
+
+    /**
      * Cell style
      *
      * @var \PhpOffice\PhpWord\Style\Cell
@@ -46,12 +53,22 @@ class Cell extends AbstractContainer
     /**
      * Create new instance
      *
-     * @param int $width
+     * @param int|array $width
      * @param array|\PhpOffice\PhpWord\Style\Cell $style
      */
     public function __construct($width = null, $style = null)
     {
-        $this->width = $width;
+        if (is_array($width)) {
+            $this->width = isset($width['width']) ? $width['width'] : null;
+            $this->unit = isset($width['unit']) ? $width['unit'] : null;
+        }
+        else $this->width = $width;
+
+        if ($this->unit === null) {
+            // Fallback is to twip for backwards compatibility.
+            $this->unit = $this->width === null ? \PhpOffice\PhpWord\Style\Table::WIDTH_AUTO : \PhpOffice\PhpWord\Style\Table::WIDTH_TWIP;
+        }
+
         $this->style = $this->setStyle(new CellStyle(), $style, true);
     }
 
@@ -73,5 +90,29 @@ class Cell extends AbstractContainer
     public function getWidth()
     {
         return $this->width;
+    }
+
+    /**
+     * Get width unit
+     *
+     * @return string
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * Set width unit
+     *
+     * @param string $value
+     * @return self
+     */
+    public function setUnit($value = null)
+    {
+        $enum = array(Table::WIDTH_AUTO, Table::WIDTH_PERCENT, Table::WIDTH_TWIP);
+        $this->unit = $this->setEnumVal($value, $enum, $this->unit);
+
+        return $this;
     }
 }

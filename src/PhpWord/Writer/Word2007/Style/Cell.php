@@ -32,6 +32,11 @@ class Cell extends AbstractStyle
     private $width;
 
     /**
+     * @var string Width unit
+     */
+    private $unit;
+
+    /**
      * Write style
      */
     public function write()
@@ -47,7 +52,7 @@ class Cell extends AbstractStyle
         // Width
         $xmlWriter->startElement('w:tcW');
         $xmlWriter->writeAttribute('w:w', $this->width);
-        $xmlWriter->writeAttribute('w:type', 'dxa');
+        $xmlWriter->writeAttribute('w:type', $this->unit);
         $xmlWriter->endElement(); // w:tcW
 
         // Text direction
@@ -95,5 +100,15 @@ class Cell extends AbstractStyle
     public function setWidth($value = null)
     {
         $this->width = $value;
+    }
+
+    /**
+     * Set width unit
+     *
+     * @param string $value
+     */
+    public function setUnit($value)
+    {
+        $this->unit = $value;
     }
 }
